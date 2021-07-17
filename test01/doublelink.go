@@ -2,13 +2,14 @@ package main
 
 import "fmt"
 
-type LinkNode struct {
+type DoubleLinkNode struct {
 	No       int
 	Name     string
-	NextNode *LinkNode
+	PreNode  *DoubleLinkNode
+	NextNode *DoubleLinkNode
 }
 
-func (receiver *LinkNode) Add(newNode *LinkNode) {
+func (receiver *DoubleLinkNode) Add(newNode *DoubleLinkNode) {
 	temp := receiver
 	for {
 		if temp.NextNode == nil {
@@ -18,9 +19,10 @@ func (receiver *LinkNode) Add(newNode *LinkNode) {
 	}
 
 	temp.NextNode = newNode
+	newNode.PreNode = temp
 }
 
-func (receiver *LinkNode) Insert(newNode *LinkNode) {
+func (receiver *DoubleLinkNode) Insert(newNode *DoubleLinkNode) {
 	temp := receiver
 	for {
 		if temp.NextNode == nil {
@@ -36,25 +38,28 @@ func (receiver *LinkNode) Insert(newNode *LinkNode) {
 	}
 
 	newNode.NextNode = temp.NextNode
-	temp.NextNode = newNode
+	temp.NextNode.PreNode = newNode
 
+	temp.NextNode = newNode
+	newNode.PreNode = temp
 }
 
-func (receiver *LinkNode) Delete(id int) {
+func (receiver *DoubleLinkNode) Delete(id int) {
 	temp := receiver
 	for {
 		if temp.NextNode == nil {
 			fmt.Printf("不存在")
 			return
-		} else if temp.NextNode.No == id {
+		} else if temp.No == id {
 			break
 		}
 		temp = temp.NextNode
 	}
-	temp.NextNode = temp.NextNode.NextNode
+	temp.NextNode.PreNode = temp.PreNode
+	temp.PreNode.NextNode = temp.NextNode
 }
 
-func (receiver *LinkNode) Show() {
+func (receiver *DoubleLinkNode) Show() {
 
 	if receiver.NextNode == nil {
 		return
@@ -68,29 +73,53 @@ func (receiver *LinkNode) Show() {
 		temp = temp.NextNode
 	}
 }
+func (receiver *DoubleLinkNode) BackShow() {
+	temp := receiver
+	if temp.NextNode == nil {
+		return
+	}
+	for {
+		if temp.NextNode == nil {
+			break
+		}
+		temp = temp.NextNode
+	}
+
+	for {
+		fmt.Println(temp.No, temp.Name, temp.PreNode)
+		if temp.PreNode == nil {
+			break
+		} else if temp.PreNode.PreNode == nil {
+			break
+		}
+		temp = temp.PreNode
+	}
+}
 
 func main() {
-	head := LinkNode{
+	head := DoubleLinkNode{
 		0,
 		"头节点",
 		nil,
+		nil,
 	}
 
-	one := &LinkNode{
+	one := &DoubleLinkNode{
 		No:   1,
 		Name: "1号",
 	}
-	two := &LinkNode{
+	two := &DoubleLinkNode{
 		No:   5,
 		Name: "5号",
 	}
-	num := &LinkNode{
+	num := &DoubleLinkNode{
 		No:   3,
 		Name: "3号",
 	}
 	head.Add(one)
 	head.Add(two)
 	head.Insert(num)
-	head.Delete(3)
+	head.Delete(1)
 	head.Show()
+	//head.BackShow()
 }
