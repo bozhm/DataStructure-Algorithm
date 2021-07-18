@@ -2,14 +2,14 @@ package main
 
 import "fmt"
 
-type CircuitQueue struct {
+type AnnularQueue struct {
 	maxSize int
 	array   [5]int
 	front   int
 	rear    int
 }
 
-func (receiver *CircuitQueue) Add(num int) {
+func (receiver *AnnularQueue) Add(num int) {
 	if receiver.IsFull() {
 		fmt.Println("满了加不了")
 		return
@@ -18,7 +18,7 @@ func (receiver *CircuitQueue) Add(num int) {
 	receiver.rear = (receiver.rear + 1) % receiver.maxSize
 }
 
-func (receiver *CircuitQueue) Get() int {
+func (receiver *AnnularQueue) Get() int {
 	if receiver.IsEmpty() {
 		fmt.Println("队列为空")
 		return -1
@@ -28,7 +28,7 @@ func (receiver *CircuitQueue) Get() int {
 	return value
 }
 
-func (receiver *CircuitQueue) Show() {
+func (receiver *AnnularQueue) Show() {
 	size := receiver.Size()
 	if size == 0 {
 		fmt.Println("队列为空")
@@ -44,22 +44,22 @@ func (receiver *CircuitQueue) Show() {
 }
 
 // IsFull 判断是否满
-func (receiver *CircuitQueue) IsFull() bool {
+func (receiver *AnnularQueue) IsFull() bool {
 	return (receiver.rear+1)%receiver.maxSize == receiver.front
 }
 
 // IsEmpty 判断是否为空
-func (receiver *CircuitQueue) IsEmpty() bool {
+func (receiver *AnnularQueue) IsEmpty() bool {
 	return receiver.front == receiver.rear
 }
 
 // Size 获取size
-func (receiver *CircuitQueue) Size() int {
+func (receiver *AnnularQueue) Size() int {
 	return (receiver.rear + receiver.maxSize - receiver.front) % receiver.maxSize
 }
 
 func main() {
-	queue := &CircuitQueue{
+	queue := &AnnularQueue{
 		maxSize: 3,
 		front:   0,
 		rear:    0,
