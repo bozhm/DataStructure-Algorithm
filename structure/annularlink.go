@@ -2,6 +2,10 @@ package main
 
 import "fmt"
 
+/**
+循环链表
+*/
+
 type AnnularLink struct {
 	No       int
 	name     string
