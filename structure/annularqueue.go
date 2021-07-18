@@ -2,6 +2,10 @@ package main
 
 import "fmt"
 
+/**
+数组循环队列
+*/
+
 type AnnularQueue struct {
 	maxSize int
 	array   [5]int
