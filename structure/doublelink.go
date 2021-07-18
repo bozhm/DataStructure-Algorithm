@@ -2,6 +2,10 @@ package main
 
 import "fmt"
 
+/**
+双向联表
+*/
+
 type DoubleLinkNode struct {
 	No       int
 	Name     string
