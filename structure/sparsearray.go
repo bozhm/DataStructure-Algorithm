@@ -2,6 +2,9 @@ package main
 
 import "fmt"
 
+/**
+稀疏数组
+*/
 func main() {
 	var array [3][6]int
 	array[1][2] = 1
