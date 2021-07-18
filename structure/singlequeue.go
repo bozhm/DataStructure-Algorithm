@@ -5,6 +5,10 @@ import (
 	"fmt"
 )
 
+/**
+数组队列
+*/
+
 type Queue struct {
 	maxSize int
 	array   [5]int
