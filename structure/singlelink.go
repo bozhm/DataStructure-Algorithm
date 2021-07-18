@@ -2,6 +2,10 @@ package main
 
 import "fmt"
 
+/**
+单链表
+*/
+
 type LinkNode struct {
 	No       int
 	Name     string
