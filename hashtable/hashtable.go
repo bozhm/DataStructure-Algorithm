@@ -33,6 +33,7 @@ func (receiver *HashTable) Push(key int, value string) {
 		//该下标没有值，直接写入
 		receiver.arr[index] = tag
 	} else {
+		//判断首节点key是否相等
 		if item.key == key {
 			item.value = value
 			return
@@ -63,6 +64,7 @@ func (receiver *HashTable) Get(key int) interface{} {
 		}
 		item = item.next
 	}
+	//判断尾节点key是否相等
 	if item.key == key {
 		return item.value
 	}
